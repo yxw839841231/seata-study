@@ -1,0 +1,168 @@
+server:
+  port: 30001
+
+spring:
+  application:
+    name: nacos-order
+  datasource:
+    druid:
+      filters: stat
+      driver-class-name: com.mysql.jdbc.Driver
+      #基本属性
+      url: jdbc:mysql://localhost:3306/seata-order?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+      username: root
+      password: 123456
+      #配置初始化大小/最小/最大
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      #获取连接等待超时时间
+      max-wait: 60000
+      #间隔多久进行一次检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60000
+      #一个连接在池中最小生存的时间
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        group: SEATA_GROUP
+
+
+mybatis-plus:
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: ${spring.application.name}-group
+  enable-auto-data-source-proxy: true
+  data-source-proxy-mode: AT
+  use-jdk-proxy: false
+  client:
+    rm:
+      async-commit-buffer-limit: 10000
+      report-retry-count: 5
+      table-meta-check-enable: false
+      report-success-enable: false
+      saga-branch-register-enable: false
+      saga-json-parser: fastjson
+      lock:
+        retry-interval: 10
+        retry-times: 30
+        retry-policy-branch-rollback-on-conflict: true
+    tm:
+      commit-retry-count: 5
+      rollback-retry-count: 5
+      default-global-transaction-timeout: 60000
+      degrade-check: false
+      degrade-check-period: 2000
+      degrade-check-allow-times: 10
+    undo:
+      data-validation: true
+      log-serialization: jackson
+      log-table: undo_log
+      only-care-update-columns: true
+  service:
+    vgroup-mapping:
+      order-service-group: default
+    grouplist:
+      default: 127.0.0.1:8091
+    enable-degrade: false
+    disable-global-transaction: false
+  transport:
+    shutdown:
+      wait: 3
+    thread-factory:
+      boss-thread-prefix: NettyBoss
+      worker-thread-prefix: NettyServerNIOWorker
+      server-executor-thread-prefix: NettyServerBizHandler
+      share-boss-worker: false
+      client-selector-thread-prefix: NettyClientSelector
+      client-selector-thread-size: 1
+      client-worker-thread-prefix: NettyClientWorkerThread
+      worker-thread-size: default
+      boss-thread-size: 1
+    type: TCP
+    server: NIO
+    heartbeat: true
+    serialization: seata
+    compressor: none
+    enable-client-batch-send-request: true
+  config:
+    type: nacos
+    consul:
+      server-addr: 127.0.0.1:8500
+    apollo:
+      apollo-meta: http://192.168.1.204:8801
+      app-id: seata-server
+      namespace: application
+      apollo-accesskey-secret: ""
+    etcd3:
+      server-addr: http://localhost:2379
+    nacos:
+      namespace: ""
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      username: ""
+      password: ""
+    zk:
+      server-addr: 127.0.0.1:2181
+      session-timeout: 6000
+      connect-timeout: 2000
+      username: ""
+      password: ""
+    custom:
+      name: ""
+  registry:
+    type: nacos
+    load-balance: RandomLoadBalance
+    load-balance-virtual-nodes: 10
+    file:
+      name: file.conf
+    consul:
+      server-addr: 127.0.0.1:8500
+    etcd3:
+      server-addr: http://localhost:2379
+    eureka:
+      weight: 1
+      service-url: http://localhost:8761/eureka
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      group : SEATA_GROUP
+      namespace: ""
+      username: ""
+      password: ""
+    redis:
+      server-addr: localhost:6379
+      db: 0
+      password: ""
+      timeout: 0
+    sofa:
+      server-addr: 127.0.0.1:9603
+      region: DEFAULT_ZONE
+      datacenter: DefaultDataCenter
+      group: SEATA_GROUP
+      address-wait-time: 3000
+      application: default
+    zk:
+      server-addr: 127.0.0.1:2181
+      session-timeout: 6000
+      connect-timeout: 2000
+      username: ""
+      password: ""
+    custom:
+      name: ""
+  log:
+    exception-rate: 100
+

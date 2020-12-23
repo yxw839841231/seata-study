@@ -18,7 +18,6 @@
     <modules>
         <module>consul</module>
         <module>nacos</module>
-        <module>nacos/nacos-order</module>
     </modules>
 
 

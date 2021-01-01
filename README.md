@@ -1,3 +1,5 @@
+文档地址：
+[http://studying.icu/](http://studying.icu/)
 SpringCloud、Mybatis-Plus 集成 Seata 1.4.0
 
 已支持的注册中心如下：

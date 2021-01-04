@@ -1,5 +1,5 @@
 文档地址：
-[http://studying.icu/](https://studying-icu-2gw631q0d6474017-1256203223.tcloudbaseapp.com/#/)
+[https://studying.icu/](https://studying.icu/#/)
 
 SpringCloud、Mybatis-Plus 集成 Seata 1.4.0
 

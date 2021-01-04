@@ -1,5 +1,5 @@
 文档地址：
-[https://studying.icu/](https://studying.icu/#/)
+[https://studying.icu/](https://www.studying.icu/#/study/framework/seata/contents/002)
 
 SpringCloud、Mybatis-Plus 集成 Seata 1.4.0
 

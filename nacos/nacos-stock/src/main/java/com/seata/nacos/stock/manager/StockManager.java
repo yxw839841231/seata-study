@@ -32,8 +32,11 @@ public class StockManager {
     @GlobalTransactional()
     @Transactional(rollbackFor = Exception.class)
     public void deal(Long goodsId, Long num) {
+
+
         log.info("xid={}", RootContext.getXID());
         integration.add(goodsId, num,RootContext.getXID());
+
         QueryWrapper queryWrapper = new QueryWrapper<Stock>();
         queryWrapper.eq("goods_id", goodsId);
         Stock stock = service.getOne(queryWrapper);

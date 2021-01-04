@@ -47,6 +47,7 @@ seata:
   tx-service-group: seata-server-group
   #  enable-auto-data-source-proxy: true
   enableAutoDataSourceProxy: true
+  time
   transport:
     # tcp, unix-domain-socket
     type: tcp

@@ -9,9 +9,9 @@ spring:
       filters: stat
       driver-class-name: com.mysql.jdbc.Driver
       #基本属性
-      url: jdbc:mysql://localhost:3306/seata-stock?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+      url: jdbc:mysql://10.3.1.49:3306/seata-stock?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
       username: root
-      password: 123456
+      password: root@appinside
       #配置初始化大小/最小/最大
       initial-size: 1
       min-idle: 1
